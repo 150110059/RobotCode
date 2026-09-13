@@ -1,227 +1,1358 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="RobotCode keeps your robot project workflow focused, clear, and ready to move.">
-    <title>RobotCode | Build with intention</title>
-    <style>
-        :root {
-            --ink: #17221f;
-            --muted: #58645f;
-            --paper: #f5f4ee;
-            --panel: #fffdf7;
-            --lime: #d7f36b;
-            --coral: #f2735b;
-            --line: #d9ddd2;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080b1a" />
 
-        * { box-sizing: border-box; }
+  <title>RobotCode — Learn to Code, Build the Future</title>
+  <meta
+    name="description"
+    content="RobotCode makes learning programming fun, visual, and easy to understand."
+  />
 
-        body {
-            margin: 0;
-            color: var(--ink);
-            background: var(--paper);
-            font-family: Georgia, "Times New Roman", serif;
-            line-height: 1.6;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
 
-        a { color: inherit; }
+  <style>
+    :root {
+      --bg: #080b1a;
+      --bg-soft: #10152b;
+      --card: rgba(20, 27, 53, 0.72);
+      --text: #f5f7ff;
+      --muted: #9ba5c7;
+      --cyan: #42e8ff;
+      --purple: #9b7bff;
+      --pink: #ff70c9;
+      --border: rgba(255, 255, 255, 0.1);
+      --radius: 24px;
+      --max-width: 1160px;
+    }
 
-        .shell {
-            width: min(1120px, calc(100% - 40px));
-            margin: 0 auto;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 28px 0;
-            font-family: Arial, sans-serif;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .brand {
-            font-size: 1.1rem;
-            font-weight: 800;
-            letter-spacing: .02em;
-        }
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-        nav a {
-            margin-left: 24px;
-            color: var(--muted);
-            font-size: .88rem;
-            text-decoration: none;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        nav a:hover { color: var(--ink); }
+    button {
+      font: inherit;
+    }
 
-        .hero {
-            display: grid;
-            grid-template-columns: 1.1fr .9fr;
-            gap: 72px;
-            align-items: center;
-            min-height: 610px;
-            padding: 58px 0 88px;
-        }
+    .container {
+      width: min(var(--max-width), calc(100% - 40px));
+      margin: 0 auto;
+    }
 
-        .eyebrow {
-            color: var(--coral);
-            font-family: Arial, sans-serif;
-            font-size: .76rem;
-            font-weight: 800;
-            letter-spacing: .14em;
-            text-transform: uppercase;
-        }
+    /* Background */
 
-        h1 {
-            max-width: 690px;
-            margin: 18px 0 24px;
-            font-size: clamp(3.5rem, 8vw, 7rem);
-            font-weight: 400;
-            letter-spacing: -.06em;
-            line-height: .9;
-        }
+    .background-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
 
-        .intro {
-            max-width: 540px;
-            margin: 0;
-            color: var(--muted);
-            font-size: 1.2rem;
-        }
+    .glow {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.14;
+    }
 
-        .button {
-            display: inline-block;
-            margin-top: 34px;
-            padding: 14px 20px;
-            border: 1px solid var(--ink);
-            background: var(--ink);
-            color: var(--panel);
-            font-family: Arial, sans-serif;
-            font-size: .85rem;
-            font-weight: 700;
-            text-decoration: none;
-        }
+    .glow.one {
+      background: var(--purple);
+      top: -220px;
+      left: -150px;
+    }
 
-        .button:hover { background: var(--coral); border-color: var(--coral); }
+    .glow.two {
+      background: var(--cyan);
+      right: -200px;
+      top: 400px;
+    }
 
-        .orbital {
-            position: relative;
-            display: grid;
-            place-items: center;
-            aspect-ratio: 1;
-            max-width: 430px;
-            margin-left: auto;
-            border: 1px solid var(--ink);
-            border-radius: 50%;
-            background: var(--lime);
-        }
+    .grid {
+      position: absolute;
+      inset: 0;
+      opacity: 0.035;
+      background-image:
+        linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: linear-gradient(to bottom, black, transparent 80%);
+    }
 
-        .orbital::before,
-        .orbital::after {
-            position: absolute;
-            content: "";
-            border: 1px solid var(--ink);
-            border-radius: 50%;
-        }
+    /* Navigation */
 
-        .orbital::before { inset: 16%; transform: rotate(34deg) scaleX(.42); }
-        .orbital::after { inset: 16%; transform: rotate(-34deg) scaleX(.42); }
+    nav {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
 
-        .mark {
-            z-index: 1;
-            display: grid;
-            place-items: center;
-            width: 116px;
-            height: 116px;
-            border: 1px solid var(--ink);
-            border-radius: 50%;
-            background: var(--coral);
-            font-family: Arial, sans-serif;
-            font-size: 2.5rem;
-            font-weight: 900;
-        }
+    .nav-inner {
+      width: min(var(--max-width), calc(100% - 40px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-        .details {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0;
-            border-top: 1px solid var(--line);
-            border-bottom: 1px solid var(--line);
-        }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
 
-        .detail { padding: 28px 24px 32px 0; }
-        .detail + .detail { padding-left: 24px; border-left: 1px solid var(--line); }
-        .detail h2 { margin: 0 0 8px; font-size: 1.35rem; font-weight: 400; }
-        .detail p { margin: 0; color: var(--muted); font-size: .96rem; }
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      color: #080b1a;
+      font-size: 20px;
+      box-shadow: 0 0 25px rgba(66,232,255,.2);
+    }
 
-        footer {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            padding: 34px 0 42px;
-            color: var(--muted);
-            font-family: Arial, sans-serif;
-            font-size: .82rem;
-        }
+    .logo span {
+      color: var(--cyan);
+    }
 
-        footer a { text-decoration: none; }
-        footer a:hover { color: var(--ink); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      color: var(--muted);
+      font-size: 14px;
+    }
 
-        @media (max-width: 760px) {
-            .shell { width: min(100% - 28px, 560px); }
-            header { padding: 20px 0; }
-            nav a { margin-left: 12px; }
-            .hero { display: flex; flex-direction: column; gap: 44px; min-height: auto; padding: 54px 0 68px; }
-            h1 { font-size: clamp(3.6rem, 18vw, 6rem); }
-            .orbital { width: min(82vw, 360px); margin: 0 auto; }
-            .details { grid-template-columns: 1fr; }
-            .detail, .detail + .detail { padding: 22px 0; border-left: 0; }
-            .detail + .detail { border-top: 1px solid var(--line); }
-            footer { flex-direction: column; }
-        }
-    </style>
+    .nav-links a {
+      transition: color .2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-button {
+      padding: 11px 19px;
+      border: 1px solid rgba(66,232,255,.35);
+      border-radius: 10px;
+      color: var(--cyan);
+      font-size: 13px;
+      transition: background .2s, transform .2s;
+    }
+
+    .nav-button:hover {
+      background: rgba(66,232,255,.08);
+      transform: translateY(-2px);
+    }
+
+    /* Hero */
+
+    .hero {
+      min-height: 680px;
+      display: flex;
+      align-items: center;
+      padding: 90px 0 110px;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--cyan);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 26px;
+      height: 1px;
+      background: var(--cyan);
+    }
+
+    h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(42px, 5vw, 70px);
+      line-height: 1.05;
+      letter-spacing: -3px;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
+
+    h1 .gradient {
+      background: linear-gradient(100deg, var(--cyan), var(--purple), var(--pink));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-description {
+      max-width: 470px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+      margin-bottom: 35px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 23px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: transform .2s, box-shadow .2s, background .2s;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .button-primary {
+      color: #07101a;
+      background: var(--cyan);
+      box-shadow: 0 8px 30px rgba(66,232,255,.15);
+    }
+
+    .button-primary:hover {
+      box-shadow: 0 12px 35px rgba(66,232,255,.3);
+    }
+
+    .button-secondary {
+      color: var(--text);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.025);
+    }
+
+    .button-secondary:hover {
+      background: rgba(255,255,255,.07);
+    }
+
+    .hero-note {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: #697596;
+      font-size: 12px;
+      margin-top: 22px;
+    }
+
+    .hero-note::before {
+      content: "✓";
+      display: grid;
+      place-items: center;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background: rgba(66,232,255,.12);
+      color: var(--cyan);
+      font-size: 10px;
+    }
+
+    /* App Preview */
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .visual-glow {
+      position: absolute;
+      width: 330px;
+      height: 330px;
+      border-radius: 50%;
+      background: var(--purple);
+      filter: blur(100px);
+      opacity: .15;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .app-preview {
+      position: relative;
+      width: 310px;
+      margin: 0 auto;
+      padding: 9px;
+      border-radius: 38px;
+      background: linear-gradient(145deg, #3a456c, #151b35 45%, #30395d);
+      box-shadow:
+        0 35px 80px rgba(0,0,0,.45),
+        0 0 0 1px rgba(255,255,255,.08);
+      transform: rotate(3deg);
+      transition: transform .4s;
+    }
+
+    .app-preview:hover {
+      transform: rotate(0deg) translateY(-8px);
+    }
+
+    .phone-screen {
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
+      min-height: 570px;
+      background:
+        radial-gradient(circle at 80% 5%, rgba(155,123,255,.2), transparent 30%),
+        #0d1226;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .phone-status {
+      display: flex;
+      justify-content: space-between;
+      padding: 17px 22px;
+      font-size: 10px;
+      color: #c6cde5;
+    }
+
+    .phone-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px 22px;
+    }
+
+    .phone-header h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 20px;
+    }
+
+    .phone-header h3 span {
+      color: var(--cyan);
+    }
+
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+    }
+
+    .welcome-card {
+      margin: 0 18px 22px;
+      padding: 20px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #1d3159, #1a1941);
+      border: 1px solid rgba(66,232,255,.12);
+    }
+
+    .welcome-card small {
+      color: var(--cyan);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .welcome-card h4 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 18px;
+      margin: 9px 0 5px;
+    }
+
+    .welcome-card p {
+      color: #8d9ac2;
+      font-size: 10px;
+    }
+
+    .robot {
+      text-align: center;
+      font-size: 70px;
+      line-height: 1;
+      padding: 8px 0 18px;
+      filter: drop-shadow(0 0 20px rgba(66,232,255,.25));
+    }
+
+    .progress-title {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 20px 9px;
+      color: #8e9abd;
+      font-size: 10px;
+    }
+
+    .progress-title strong {
+      color: var(--cyan);
+    }
+
+    .progress-bar {
+      height: 6px;
+      margin: 0 20px 22px;
+      border-radius: 10px;
+      background: #202946;
+      overflow: hidden;
+    }
+
+    .progress-bar div {
+      width: 68%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+    }
+
+    .lesson-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 0 18px;
+    }
+
+    .lesson {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.035);
+      border: 1px solid rgba(255,255,255,.04);
+    }
+
+    .lesson-icon {
+      width: 35px;
+      height: 35px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: rgba(66,232,255,.1);
+      font-size: 16px;
+    }
+
+    .lesson:nth-child(2) .lesson-icon {
+      background: rgba(155,123,255,.12);
+    }
+
+    .lesson:nth-child(3) .lesson-icon {
+      background: rgba(255,112,201,.1);
+    }
+
+    .lesson-text {
+      flex: 1;
+    }
+
+    .lesson-text strong {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .lesson-text span {
+      color: #687598;
+      font-size: 9px;
+    }
+
+    .lesson-check {
+      color: var(--cyan);
+      font-size: 14px;
+    }
+
+    .floating-badge {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 17px;
+      border-radius: 14px;
+      background: rgba(17, 24, 49, .92);
+      border: 1px solid rgba(255,255,255,.1);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 15px 35px rgba(0,0,0,.25);
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .floating-badge .badge-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      background: rgba(66,232,255,.1);
+      color: var(--cyan);
+    }
+
+    .badge-top {
+      top: 65px;
+      right: -30px;
+    }
+
+    .badge-bottom {
+      bottom: 55px;
+      left: -45px;
+    }
+
+    /* Section */
+
+    section {
+      padding: 100px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 620px;
+      margin: 0 auto 55px;
+    }
+
+    .section-label {
+      display: inline-block;
+      color: var(--cyan);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(30px, 4vw, 45px);
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      margin-bottom: 17px;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* Features */
+
+    .features {
+      background: linear-gradient(
+        180deg,
+        transparent,
+        rgba(16,21,43,.4),
+        transparent
+      );
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature-card {
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card);
+      transition: transform .25s, border-color .25s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(66,232,255,.25);
+    }
+
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: rgba(66,232,255,.08);
+      color: var(--cyan);
+      font-size: 23px;
+      margin-bottom: 22px;
+    }
+
+    .feature-card:nth-child(2) .feature-icon {
+      color: var(--purple);
+      background: rgba(155,123,255,.1);
+    }
+
+    .feature-card:nth-child(3) .feature-icon {
+      color: var(--pink);
+      background: rgba(255,112,201,.1);
+    }
+
+    .feature-card h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 19px;
+      margin-bottom: 12px;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    /* How it works */
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 45px;
+      position: relative;
+    }
+
+    .steps::before {
+      content: "";
+      position: absolute;
+      top: 31px;
+      left: 16%;
+      right: 16%;
+      border-top: 1px dashed rgba(66,232,255,.25);
+    }
+
+    .step {
+      position: relative;
+      text-align: center;
+    }
+
+    .step-number {
+      position: relative;
+      z-index: 1;
+      width: 62px;
+      height: 62px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 25px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1px solid rgba(66,232,255,.4);
+      color: var(--cyan);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .step h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 19px;
+      margin-bottom: 10px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    /* Screenshots */
+
+    .screenshots {
+      overflow: hidden;
+    }
+
+    .screenshots-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 22px;
+      padding: 10px 0;
+    }
+
+    .mini-phone {
+      width: 220px;
+      min-height: 390px;
+      border-radius: 27px;
+      padding: 7px;
+      background: linear-gradient(145deg, #344064, #141a33);
+      box-shadow: 0 20px 50px rgba(0,0,0,.25);
+    }
+
+    .mini-screen {
+      min-height: 376px;
+      border-radius: 21px;
+      background: #0f152b;
+      padding: 18px 14px;
+      overflow: hidden;
+    }
+
+    .mini-phone:nth-child(1) {
+      transform: rotate(-5deg) translateY(15px);
+    }
+
+    .mini-phone:nth-child(3) {
+      transform: rotate(5deg) translateY(15px);
+    }
+
+    .mini-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 15px;
+      margin-bottom: 18px;
+    }
+
+    .mini-block {
+      height: 42px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      background: #1b2645;
+      border: 1px solid rgba(255,255,255,.04);
+      padding: 12px;
+      font-size: 10px;
+      color: #aab7da;
+    }
+
+    .mini-block.active {
+      background: linear-gradient(90deg, rgba(66,232,255,.18), rgba(155,123,255,.15));
+      border-color: rgba(66,232,255,.2);
+      color: var(--cyan);
+    }
+
+    .mini-code {
+      padding: 17px;
+      border-radius: 14px;
+      background: #080d1e;
+      font-family: monospace;
+      font-size: 10px;
+      line-height: 2;
+      color: #8b9bc8;
+      margin-bottom: 15px;
+    }
+
+    .mini-code .cyan {
+      color: var(--cyan);
+    }
+
+    .mini-code .purple {
+      color: var(--purple);
+    }
+
+    .mini-robot {
+      text-align: center;
+      font-size: 62px;
+      padding: 25px 0;
+    }
+
+    .mini-button {
+      text-align: center;
+      background: var(--cyan);
+      color: #07101a;
+      border-radius: 9px;
+      padding: 10px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    /* CTA */
+
+    .cta {
+      padding: 30px 0 110px;
+    }
+
+    .cta-box {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 80px 30px;
+      border: 1px solid rgba(66,232,255,.15);
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(66,232,255,.1), transparent 35%),
+        radial-gradient(circle at 80% 100%, rgba(155,123,255,.12), transparent 35%),
+        #10162d;
+    }
+
+    .cta-box::before {
+      content: "</>";
+      position: absolute;
+      font-family: monospace;
+      font-size: 180px;
+      font-weight: 700;
+      color: rgba(255,255,255,.018);
+      top: 10px;
+      right: 30px;
+      transform: rotate(-10deg);
+    }
+
+    .cta-box h2 {
+      position: relative;
+      margin-bottom: 18px;
+    }
+
+    .cta-box p {
+      position: relative;
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 30px;
+    }
+
+    .cta-box .button {
+      position: relative;
+    }
+
+    /* Footer */
+
+    footer {
+      padding: 30px 0;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-copy {
+      color: #687494;
+      font-size: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      color: #7d89aa;
+      font-size: 12px;
+    }
+
+    .footer-links a:hover {
+      color: var(--cyan);
+    }
+
+    /* Responsive */
+
+    @media (max-width: 900px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 60px;
+      }
+
+      .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .hero-note {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        max-width: 400px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      .steps {
+        gap: 30px;
+      }
+
+      .steps::before {
+        left: 12%;
+        right: 12%;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .container,
+      .nav-inner {
+        width: min(var(--max-width), calc(100% - 30px));
+      }
+
+      nav {
+        height: 70px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 65px 0 80px;
+      }
+
+      h1 {
+        font-size: 43px;
+        letter-spacing: -2px;
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      section {
+        padding: 75px 0;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .steps::before {
+        display: none;
+      }
+
+      .screenshots-row {
+        gap: 10px;
+      }
+
+      .mini-phone {
+        width: 30%;
+        min-height: 260px;
+        padding: 4px;
+        border-radius: 17px;
+      }
+
+      .mini-screen {
+        min-height: 252px;
+        border-radius: 14px;
+        padding: 12px 8px;
+      }
+
+      .mini-title {
+        font-size: 10px;
+        margin-bottom: 12px;
+      }
+
+      .mini-block {
+        height: 29px;
+        padding: 8px 7px;
+        font-size: 7px;
+        margin-bottom: 6px;
+      }
+
+      .mini-code {
+        padding: 9px;
+        font-size: 6px;
+        line-height: 2;
+      }
+
+      .mini-robot {
+        font-size: 35px;
+        padding: 12px 0;
+      }
+
+      .mini-button {
+        padding: 7px 3px;
+        font-size: 7px;
+      }
+
+      .badge-top {
+        right: -10px;
+        top: 45px;
+        transform: scale(.8);
+      }
+
+      .badge-bottom {
+        left: -20px;
+        bottom: 30px;
+        transform: scale(.8);
+      }
+
+      .app-preview {
+        width: 275px;
+      }
+
+      .phone-screen {
+        min-height: 520px;
+      }
+
+      .cta-box {
+        padding: 60px 20px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="shell">
-        <header>
-            <div class="brand">RobotCode</div>
-            <nav aria-label="Site navigation">
-                <a href="privacy-policy/">Privacy Policy</a>
-            </nav>
-        </header>
 
-        <main>
-            <section class="hero">
-                <div>
-                    <div class="eyebrow">A clear place for the next move</div>
-                    <h1>Build it.<br>Run it.<br>Repeat.</h1>
-                    <p class="intro">RobotCode keeps your robot project workflow focused, clear, and ready to move from an idea to the next test.</p>
-                    <a class="button" href="privacy-policy/">Read the privacy policy</a>
-                </div>
-                <div class="orbital" aria-hidden="true"><div class="mark">R</div></div>
-            </section>
+  <div class="background-glow">
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+    <div class="grid"></div>
+  </div>
 
-            <section class="details" aria-label="RobotCode principles">
-                <article class="detail">
-                    <h2>Stay focused</h2>
-                    <p>A simple home for the work that matters in your robot project.</p>
-                </article>
-                <article class="detail">
-                    <h2>Move deliberately</h2>
-                    <p>Keep each iteration visible, understandable, and ready for the next step.</p>
-                </article>
-                <article class="detail">
-                    <h2>Work locally</h2>
-                    <p>RobotCode is designed around a direct, practical experience on your device.</p>
-                </article>
-            </section>
-        </main>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-icon">🤖</div>
+        Robot<span>Code</span>
+      </a>
 
-        <footer>
-            <span>RobotCode</span>
-            <span><a href="privacy-policy/">Privacy Policy</a> &middot; &copy; 2026</span>
-        </footer>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#screenshots">Preview</a>
+      </div>
+
+      <a href="#download" class="nav-button">Get the app ↗</a>
     </div>
+  </nav>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-content">
+
+        <div class="hero-text">
+          <div class="eyebrow">Learn. Create. Explore.</div>
+
+          <h1>
+            Your first step into the world of
+            <span class="gradient">coding.</span>
+          </h1>
+
+          <p class="hero-description">
+            RobotCode makes programming simple, visual, and fun.
+            Learn the fundamentals, solve challenges, and bring your
+            own ideas to life — one block at a time.
+          </p>
+
+          <div class="hero-buttons">
+            <!-- Replace # with your Google Play URL -->
+            <a href="#" class="button button-primary">
+              <span>▶</span>
+              Download on Google Play
+            </a>
+
+            <a href="#features" class="button button-secondary">
+              Explore RobotCode ↓
+            </a>
+          </div>
+
+          <div class="hero-note">
+            Designed for curious minds · Learn at your own pace
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="visual-glow"></div>
+
+          <div class="app-preview">
+            <div class="phone-screen">
+
+              <div class="phone-status">
+                <span>9:41</span>
+                <span>● ● ▰</span>
+              </div>
+
+              <div class="phone-header">
+                <h3>Robot<span>Code</span></h3>
+                <div class="avatar">👨‍🚀</div>
+              </div>
+
+              <div class="welcome-card">
+                <small>Today's mission</small>
+                <h4>Build your first robot</h4>
+                <p>Complete the challenge and unlock a new skill.</p>
+              </div>
+
+              <div class="robot">🤖</div>
+
+              <div class="progress-title">
+                <span>Your progress</span>
+                <strong>68%</strong>
+              </div>
+
+              <div class="progress-bar">
+                <div></div>
+              </div>
+
+              <div class="lesson-list">
+                <div class="lesson">
+                  <div class="lesson-icon">🧩</div>
+                  <div class="lesson-text">
+                    <strong>Logic & Sequences</strong>
+                    <span>Lesson 04 · Completed</span>
+                  </div>
+                  <div class="lesson-check">✓</div>
+                </div>
+
+                <div class="lesson">
+                  <div class="lesson-icon">⚡</div>
+                  <div class="lesson-text">
+                    <strong>Commands & Loops</strong>
+                    <span>Lesson 05 · In progress</span>
+                  </div>
+                  <div class="lesson-check">›</div>
+                </div>
+
+                <div class="lesson">
+                  <div class="lesson-icon">🚀</div>
+                  <div class="lesson-text">
+                    <strong>Build a Mission</strong>
+                    <span>Lesson 06 · Locked</span>
+                  </div>
+                  <div class="lesson-check">›</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="floating-badge badge-top">
+            <div class="badge-icon">⚡</div>
+            <div>
+              <div>New skill unlocked</div>
+              <small style="color:#7381a5;">Logic Explorer</small>
+            </div>
+          </div>
+
+          <div class="floating-badge badge-bottom">
+            <div class="badge-icon">🏆</div>
+            <div>
+              <div>Challenge completed</div>
+              <small style="color:#7381a5;">+120 XP earned</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+      <div class="container">
+
+        <div class="section-header">
+          <div class="section-label">Why RobotCode?</div>
+          <h2>Learning to code should feel like an adventure.</h2>
+          <p>
+            Everything you need to understand programming concepts
+            without getting overwhelmed.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+
+          <div class="feature-card">
+            <div class="feature-icon">🧩</div>
+            <h3>Visual Learning</h3>
+            <p>
+              Understand programming concepts through clear,
+              visual building blocks. No confusing syntax to
+              memorize from day one.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>Learn by Doing</h3>
+            <p>
+              Solve interactive challenges and see the result
+              of your code immediately. Every challenge turns
+              knowledge into practice.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🚀</div>
+            <h3>Build Your Skills</h3>
+            <p>
+              Progress from simple commands to logic, loops,
+              and creative projects. Learn at your own pace
+              and keep discovering.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how-it-works">
+      <div class="container">
+
+        <div class="section-header">
+          <div class="section-label">Simple by design</div>
+          <h2>Start small. Think big.</h2>
+          <p>
+            A simple learning journey that makes every step feel rewarding.
+          </p>
+        </div>
+
+        <div class="steps">
+
+          <div class="step">
+            <div class="step-number">01</div>
+            <h3>Explore</h3>
+            <p>
+              Discover the basics of programming through
+              interactive lessons.
+            </p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">02</div>
+            <h3>Solve</h3>
+            <p>
+              Put your knowledge into action with challenges
+              designed to build confidence.
+            </p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">03</div>
+            <h3>Create</h3>
+            <p>
+              Combine what you learn and start building
+              your own ideas.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Screenshots -->
+    <section class="screenshots" id="screenshots">
+      <div class="container">
+
+        <div class="section-header">
+          <div class="section-label">Inside the app</div>
+          <h2>A playful way to understand code.</h2>
+          <p>
+            Replace these preview cards with real RobotCode
+            screenshots when the app is ready.
+          </p>
+        </div>
+
+        <div class="screenshots-row">
+
+          <div class="mini-phone">
+            <div class="mini-screen">
+              <div class="mini-title">Choose a lesson</div>
+              <div class="mini-block active">🧩 Sequences</div>
+              <div class="mini-block">🔁 Loops</div>
+              <div class="mini-block">⚡ Conditions</div>
+              <div class="mini-block">🚀 Missions</div>
+              <div class="mini-robot">🤖</div>
+            </div>
+          </div>
+
+          <div class="mini-phone">
+            <div class="mini-screen">
+              <div class="mini-title">Build your code</div>
+              <div class="mini-code">
+                <span class="purple">move</span>()<br />
+                <span class="cyan">turn</span>(<span class="purple">right</span>)<br />
+                <span class="purple">move</span>()<br />
+                <span class="cyan">collect</span>()
+              </div>
+              <div class="mini-robot">🤖</div>
+              <div class="mini-button">RUN PROGRAM ▶</div>
+            </div>
+          </div>
+
+          <div class="mini-phone">
+            <div class="mini-screen">
+              <div class="mini-title">Mission complete!</div>
+              <div class="mini-robot">🏆</div>
+              <div class="mini-block active">✓ Challenge solved</div>
+              <div class="mini-block">⭐ +120 XP</div>
+              <div class="mini-button">NEXT CHALLENGE →</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="download">
+      <div class="container">
+        <div class="cta-box">
+          <h2>Ready to start coding?</h2>
+          <p>
+            Turn curiosity into creativity with RobotCode.
+          </p>
+
+          <!-- Replace # with your Google Play URL -->
+          <a href="#" class="button button-primary">
+            <span>▶</span>
+            Get RobotCode on Google Play
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-copy">
+        © 2026 RobotCode. Made with curiosity.
+      </div>
+
+      <div class="footer-links">
+        <a href="privacy-policy/">Privacy Policy</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
